@@ -37,4 +37,3 @@ keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 --experimental
---keymap.set("i", "<cmd>s", "<cmd>w<cr>") -- trying to save while in insert mode
