@@ -8,7 +8,7 @@ local keymap = vim.keymap
 keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "<leader>cc", ":nohl<CR>")
 
 -- delete single character from normal mode without copying into register
 keymap.set("n", "x", '"_x')
@@ -40,4 +40,20 @@ keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
+--move lines while highlighted
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+--center view upon virtical line movements
+--[[ keymap.set("n", "<C-d>", "<C-d>zz")
+keymap.set("n", "<C-u>", "<C-u>zz") ]]
+
+-- use capital J & K for half page jumps, but also center the view
+keymap.set("n", "J", "<C-d>zz")
+keymap.set("n", "K", "<C-u>zz")
+
+keymap.set("n", "G", "Gzz") -- center the view after jumping to the bottom of the file
+
 --experimental
+keymap.set("n", "<leader><CR>", "o<Esc>") -- create new empty line below but stay in normal mode (need one for capital O also.)
+keymap.set("v", ",", "<Esc>") -- use , to escape while in visual line mode
