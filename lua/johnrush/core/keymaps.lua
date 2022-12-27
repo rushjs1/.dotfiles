@@ -54,6 +54,15 @@ keymap.set("n", "K", "<C-u>zz")
 
 keymap.set("n", "G", "Gzz") -- center the view after jumping to the bottom of the file
 
+-- search within current buffer
+keymap.set("n", "<leader>/", function()
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer]" })
+
 --experimental
 keymap.set("n", "<leader><CR>", "o<Esc>") -- create new empty line below but stay in normal mode (need one for capital O also.)
 keymap.set("v", ",", "<Esc>") -- use , to escape while in visual line mode
+keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find Recently opened files" }) -- is there a way to add zz to this?
