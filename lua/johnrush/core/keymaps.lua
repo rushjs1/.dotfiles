@@ -52,6 +52,10 @@ keymap.set("n", "<C-u>", "<C-u>zz") ]]
 keymap.set("n", "J", "<C-d>zz")
 keymap.set("n", "K", "<C-u>zz")
 
+--swap { and } for vertial paragraph jumps because why not
+keymap.set("n", "{", "}")
+keymap.set("n", "}", "{")
+
 keymap.set("n", "G", "Gzz") -- center the view after jumping to the bottom of the file
 
 -- search within current buffer
