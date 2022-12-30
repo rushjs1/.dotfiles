@@ -68,5 +68,5 @@ end, { desc = "[/] Fuzzily search in current buffer]" })
 
 --experimental
 keymap.set("n", "<leader><CR>", "o<Esc>") -- create new empty line below but stay in normal mode (need one for capital O also.)
-keymap.set("v", ",", "<Esc>") -- use , to escape while in visual line mode
+keymap.set("v", "m", "<Esc>") -- use m to escape while in visual line mode
 keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find Recently opened files" }) -- is there a way to add zz to this?
