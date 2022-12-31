@@ -16,6 +16,7 @@ opt.wrap = false
 -- search settings
 opt.ignorecase = true
 opt.smartcase = true
+opt.incsearch = true
 
 -- cursor line
 opt.cursorline = true
@@ -38,3 +39,9 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 opt.scrolloff = 8
+
+-- backups
+opt.swapfile = false
+opt.backup = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
