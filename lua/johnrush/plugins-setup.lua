@@ -83,7 +83,31 @@ return packer.startup(function(use)
 	-- configuring lsp servers
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
-	use({ "glepnir/lspsaga.nvim", branch = "main" })
+
+	--	use({ "glepnir/lspsaga.nvim", branch = "main" })
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		config = function()
+			require("lspsaga").setup({
+				move_in_saga = { prev = "<C-k>", next = "<C-j>" },
+				finder = {
+					open = "<CR>",
+				},
+				definition = {
+					edit = "<CR>",
+				},
+				lightbulb = {
+					enable = true,
+					enable_in_insert = true,
+					sign = true,
+					sign_priority = 40,
+					virtual_text = true,
+				},
+			})
+		end,
+	})
+
 	use("jose-elias-alvarez/typescript.nvim")
 	use("onsails/lspkind.nvim")
 
