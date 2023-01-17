@@ -8,3 +8,5 @@ nmap K <C-u>zz
 nmap G Gzz
 vmap m <ESC>
 
+vmap J :action MoveLineDown<CR>
+vmap K :action MoveLineUp<CR>
