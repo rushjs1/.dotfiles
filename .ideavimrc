@@ -1,0 +1,9 @@
+set relativenumber
+set number
+
+imap jk <ESC>
+nmap J <C-d>zz
+nmap K <C-u>zz
+nmap G Gzz
+vmap m <ESC>
+
