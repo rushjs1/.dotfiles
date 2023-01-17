@@ -1,5 +1,6 @@
 set relativenumber
 set number
+set scrolloff=8
 
 imap jk <ESC>
 nmap J <C-d>zz
