@@ -33,14 +33,17 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	use("bluz71/vim-nightfly-colors")
-	--use("catppuccin/nvim")
-	--[[ use({
+	use("bluz71/vim-moonfly-colors")
+
+	--[[ use("catppuccin/nvim")
+	use("ellisonleao/gruvbox.nvim")
+	use({
 		"rose-pine/neovim",
 		as = "rose-pine",
 		config = function()
 			vim.cmd("colorscheme rose-pine")
 		end,
-	}) ]]
+	})  ]]
 
 	--tmux & split window navigation
 	use("christoomey/vim-tmux-navigator")
