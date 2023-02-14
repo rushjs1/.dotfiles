@@ -32,8 +32,10 @@ return packer.startup(function(use)
 	-- lua function that many plugins use
 	use("nvim-lua/plenary.nvim")
 
+	-- colorschemes
 	use("bluz71/vim-nightfly-colors")
 	use("bluz71/vim-moonfly-colors")
+	use("rebelot/kanagawa.nvim")
 
 	--[[ use("catppuccin/nvim")
 	use("ellisonleao/gruvbox.nvim")
@@ -53,7 +55,7 @@ return packer.startup(function(use)
 	use("tpope/vim-surround")
 	use("vim-scripts/ReplaceWithRegister")
 
-	--commenting wuth gc
+	--commenting with gc
 	use("numToStr/Comment.nvim")
 
 	--file explorer
@@ -87,29 +89,7 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
 
-	--	use({ "glepnir/lspsaga.nvim", branch = "main" })
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		config = function()
-			require("lspsaga").setup({
-				move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-				finder = {
-					open = "<CR>",
-				},
-				definition = {
-					edit = "<CR>",
-				},
-				lightbulb = {
-					enable = true,
-					enable_in_insert = true,
-					sign = true,
-					sign_priority = 40,
-					virtual_text = true,
-				},
-			})
-		end,
-	})
+	use({ "glepnir/lspsaga.nvim", branch = "main" })
 
 	use("jose-elias-alvarez/typescript.nvim")
 	use("onsails/lspkind.nvim")
