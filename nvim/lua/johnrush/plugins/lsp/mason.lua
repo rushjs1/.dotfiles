@@ -21,7 +21,7 @@ mason_lspconfig.setup({
 		"html",
 		"cssls",
 		"tailwindcss",
-		"lua-language-server",
+		"lua_ls",
 		"volar",
 	},
 })
