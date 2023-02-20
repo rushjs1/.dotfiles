@@ -1,12 +1,16 @@
 set relativenumber
 set number
 set scrolloff=8
+let mapleader=" "
 
 imap jk <ESC>
+
 nmap J <C-d>zz
 nmap K <C-u>zz
 nmap G Gzz
-vmap m <ESC>
+nmap <leader>p :action GotoFile<CR>
 
+vmap m <ESC>
 vmap J :action MoveLineDown<CR>
 vmap K :action MoveLineUp<CR>
+
