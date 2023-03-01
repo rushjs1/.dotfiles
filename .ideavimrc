@@ -8,6 +8,7 @@ imap jk <ESC>
 nmap J <C-d>zz
 nmap K <C-u>zz
 nmap G Gzz
+nmap E ea
 nmap <leader>p :action GotoFile<CR>
 
 vmap m <ESC>
