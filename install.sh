@@ -44,7 +44,7 @@ echo "installing valet"
 composer global require laravel/valet
 valet install
 mkdir ~/desktop/sites
-cd ~/sites
+cd ~/desktop/sites
 valet park
 cd 
 
