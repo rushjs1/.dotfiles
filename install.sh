@@ -23,6 +23,7 @@ brew install php
 brew install mysql
 brew install sqlite
 brew install gh
+brew install node
 
 if [[`uname` == 'Darwin']]; then
   echo "Mac detected."
