@@ -21,6 +21,7 @@ keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width
 keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
 keymap.set("n", "<leader>tt", "<C-w>s :terminal<CR> :resize 10<CR> A") -- open new terminal window horizonally, resize and start from insert mode
+keymap.set("n", "<leader>vt", "<C-w>v :terminal<CR> :vertical resize 50<CR> A") -- open new terminal window vertically, resize and start from insert mode
 
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
@@ -72,3 +73,4 @@ keymap.set("v", "m", "<Esc>") -- use m to escape while in visual line mode
 keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find Recently opened files" })
 keymap.set("n", "r", "<C-r>") -- use r to redo instead of ctrl-r
 keymap.set("n", "E", "ea") -- capital E will move to the end of the word and enter insert mode
+keymap.set("n", "<leader>w", ":w<CR>")

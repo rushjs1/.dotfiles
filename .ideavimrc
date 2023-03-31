@@ -10,6 +10,7 @@ nmap K <C-u>zz
 nmap G Gzz
 nmap E ea
 nmap <leader>p :action GotoFile<CR>
+nmap <leader>w :action SaveDocument<CR>
 
 vmap m <ESC>
 vmap J :action MoveLineDown<CR>
