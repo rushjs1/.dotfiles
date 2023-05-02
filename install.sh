@@ -31,6 +31,9 @@ if [[`uname` == 'Darwin']]; then
   brew install --cask iterm2
 fi
 
+echo "Install nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 echo "installing composer"
 #install composer
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
