@@ -62,7 +62,8 @@ return packer.startup(function(use)
 	use("nvim-tree/nvim-tree.lua")
 
 	-- icons
-	use("kyazdani42/nvim-web-devicons")
+	--use("kyazdani42/nvim-web-devicons")
+	use("nvim-tree/nvim-web-devicons")
 
 	-- statusline
 	use("nvim-lualine/lualine.nvim")
@@ -89,7 +90,14 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
 
-	use({ "glepnir/lspsaga.nvim", branch = "main" })
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		requires = {
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	})
 
 	use("jose-elias-alvarez/typescript.nvim")
 	use("onsails/lspkind.nvim")
@@ -102,7 +110,8 @@ return packer.startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
+			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+			ts_update()
 		end,
 	})
 
@@ -113,6 +122,10 @@ return packer.startup(function(use)
 	use("lewis6991/gitsigns.nvim")
 
 	use("andweeb/presence.nvim")
+
+	use("~/plugins/html-jump")
+
+	use("wakatime/vim-wakatime")
 
 	if packer_bootstrap then
 		require("packer").sync()
