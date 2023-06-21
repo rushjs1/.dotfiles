@@ -7,7 +7,9 @@ if tonumber(hour) <= 7 or tonumber(hour) >= 18 then
 	status = pcall(vim.cmd, "colorscheme moonfly")
 else
 	--[[ 	status = pcall(vim.cmd, "colorscheme kanagawa") ]]
-	status = pcall(vim.cmd, "colorscheme nightfly")
+	--[[ 	status = pcall(vim.cmd, "colorscheme nightfly") ]]
+	--[[ 	status = pcall(vim.cmd, "colorscheme moonfly") ]]
+	status = pcall(vim.cmd, "colorscheme vscode")
 end
 
 vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#f87171" })
@@ -17,6 +19,8 @@ vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#38bdf8" })
 
 vim.api.nvim_set_hl(0, "Visual", { bg = "#059669" })
 vim.api.nvim_set_hl(0, "String", { fg = "#ecc48d" })
+
+vim.api.nvim_set_hl(0, "MatchParen", { bg = "#51504f", fg = "orange" })
 
 if not status then
 	print("Colorscheme not found!")
