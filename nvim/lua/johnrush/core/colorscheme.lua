@@ -9,6 +9,13 @@ else
 	--[[ 	status = pcall(vim.cmd, "colorscheme kanagawa") ]]
 	--[[ 	status = pcall(vim.cmd, "colorscheme nightfly") ]]
 	--[[ 	status = pcall(vim.cmd, "colorscheme moonfly") ]]
+	require("vscode").setup({
+		disable_nvimtree_bg = true,
+		color_overrides = {
+			vscBack = "#000000",
+		},
+	})
+
 	status = pcall(vim.cmd, "colorscheme vscode")
 end
 
@@ -21,6 +28,8 @@ vim.api.nvim_set_hl(0, "Visual", { bg = "#059669" })
 vim.api.nvim_set_hl(0, "String", { fg = "#ecc48d" })
 
 vim.api.nvim_set_hl(0, "MatchParen", { bg = "#51504f", fg = "orange" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#DCDCAA" })
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#000000" })
 
 if not status then
 	print("Colorscheme not found!")
