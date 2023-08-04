@@ -23,6 +23,7 @@ mason_lspconfig.setup({
 		"tailwindcss",
 		"lua_ls",
 		"volar",
+		"phpactor",
 	},
 })
 
@@ -31,5 +32,7 @@ mason_null_ls.setup({
 		"prettier",
 		"stylua",
 		"eslint_d",
+		"phpcs",
+		"phpcbf",
 	},
 })

@@ -71,6 +71,7 @@ end, { desc = "[/] Fuzzily search in current buffer]" })
 keymap.set("n", "<leader><CR>", "o<Esc>") -- create new empty line below but stay in normal mode (need one for capital O also.)
 keymap.set("v", "m", "<Esc>") -- use m to escape while in visual line mode
 keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find Recently opened files" })
+keymap.set("n", "<leader>gd", require("telescope.builtin").diagnostics)
 keymap.set("n", "r", "<C-r>") -- use r to redo instead of ctrl-r
 keymap.set("n", "E", "ea") -- capital E will move to the end of the word and enter insert mode
 keymap.set("n", "<leader>w", ":w<CR>")

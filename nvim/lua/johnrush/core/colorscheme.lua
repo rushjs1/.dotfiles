@@ -4,7 +4,16 @@ local status
 
 -- use nightfly if its past 7am(day) and then use moonfly after 6pm(night)
 if tonumber(hour) <= 7 or tonumber(hour) >= 18 then
-	status = pcall(vim.cmd, "colorscheme moonfly")
+	--status = pcall(vim.cmd, "colorscheme moonfly")
+
+	require("vscode").setup({
+		disable_nvimtree_bg = true,
+		color_overrides = {
+			vscBack = "#000000",
+		},
+	})
+
+	status = pcall(vim.cmd, "colorscheme vscode")
 else
 	--[[ 	status = pcall(vim.cmd, "colorscheme kanagawa") ]]
 	--[[ 	status = pcall(vim.cmd, "colorscheme nightfly") ]]
