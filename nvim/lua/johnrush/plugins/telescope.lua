@@ -10,12 +10,16 @@ end
 
 telescope.setup({
 	defaults = {
-		mapping = {
+		mappings = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-j>"] = actions.move_selection_next,
 				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-				["<esc>"] = actions.close,
+			},
+			n = {
+				["K"] = actions.move_to_middle,
+				["J"] = actions.move_to_bottom,
+				["q"] = actions.close,
 			},
 		},
 	},

@@ -40,14 +40,6 @@ return packer.startup(function(use)
 	use("ellisonleao/gruvbox.nvim")
 	use("Mofiqul/vscode.nvim")
 
-	--[[ use({
-		"rose-pine/neovim",
-		as = "rose-pine",
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
-	}) ]]
-
 	--tmux & split window navigation
 	use("christoomey/vim-tmux-navigator")
 	use("szw/vim-maximizer")
@@ -90,15 +82,6 @@ return packer.startup(function(use)
 	-- configuring lsp servers
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
-
-	--[[ use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		requires = {
-			{ "nvim-tree/nvim-web-devicons" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	}) ]]
 
 	use({
 		"nvimdev/lspsaga.nvim",
