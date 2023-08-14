@@ -39,7 +39,7 @@ keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>")
 keymap.set("n", "<leader>ff", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<cr>")
+keymap.set("n", "<leader>ht", "<cmd>Telescope help_tags<cr>")
 
 --move lines while highlighted
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
