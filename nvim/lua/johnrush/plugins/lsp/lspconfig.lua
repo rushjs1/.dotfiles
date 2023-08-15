@@ -20,15 +20,16 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	--set keybinds
-	keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- buffer needs instances of 'interface' type
-	keymap.set("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>")
-	keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+	keymap.set("n", "<leader>h", vim.lsp.buf.hover)
+	keymap.set("n", "[d", vim.diagnostic.goto_prev)
+	keymap.set("n", "]d", vim.diagnostic.goto_next)
+	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- buffer needs instances of 'interface' type
+	keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 	keymap.set("n", "<leader>vtd", vim.lsp.buf.type_definition, opts)
 	keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	keymap.set("n", "[d", vim.diagnostic.goto_prev)
-	keymap.set("n", "]d", vim.diagnostic.goto_next)
 	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
 	keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 	--keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
