@@ -20,7 +20,7 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	--set keybinds
-	keymap.set("n", "<leader>h", vim.lsp.buf.hover)
+	keymap.set("n", "hd", vim.lsp.buf.hover)
 	keymap.set("n", "[d", vim.diagnostic.goto_prev)
 	keymap.set("n", "]d", vim.diagnostic.goto_next)
 	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)

@@ -23,3 +23,10 @@ if not cmp_setup then
 end
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+--[[ local ts_autotag_setup, ts_autotag = pcall(require, "nvim-ts-autotag")
+if not ts_autotag_setup then
+	return
+end
+
+ts_autotag.setup({}) ]]
