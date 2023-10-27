@@ -33,11 +33,11 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	-- colorschemes
-	use("bluz71/vim-nightfly-colors")
+	--[[ use("bluz71/vim-nightfly-colors")
 	use("bluz71/vim-moonfly-colors")
 	use("rebelot/kanagawa.nvim")
 	use("catppuccin/nvim")
-	use("ellisonleao/gruvbox.nvim")
+	use({ "ellisonleao/gruvbox.nvim" }) ]]
 	use("Mofiqul/vscode.nvim")
 
 	--tmux & split window navigation
@@ -95,8 +95,8 @@ return packer.startup(function(use)
 	use("onsails/lspkind.nvim")
 
 	--formatting and linting
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("jayp0521/mason-null-ls.nvim")
+	use({ "nvimtools/none-ls.nvim" })
+	use("jay-babu/mason-null-ls.nvim")
 
 	--treesitter
 	use({
