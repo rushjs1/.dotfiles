@@ -55,7 +55,6 @@ return packer.startup(function(use)
 	use("nvim-tree/nvim-tree.lua")
 
 	-- icons
-	--use("kyazdani42/nvim-web-devicons")
 	use("nvim-tree/nvim-web-devicons")
 
 	-- statusline
@@ -115,9 +114,25 @@ return packer.startup(function(use)
 
 	use("andweeb/presence.nvim")
 
-	use("~/plugins/html-jump")
-
 	use("wakatime/vim-wakatime")
+
+	-- My Plugins
+	use("~/plugins/clock")
+	use("~/plugins/goto-alias")
+
+	--[[ use("~/plugins/html-jump")
+	use("~/plugins/stackmap")
+	use({
+		"~/plugins/clock",
+		config = function()
+			require("clock").setup({
+				keymap = "<space>m",
+				title_pos = "left",
+				window_pos = "center",
+				timeout_duration = 3000,
+			})
+		end,
+	}) ]]
 
 	if packer_bootstrap then
 		require("packer").sync()

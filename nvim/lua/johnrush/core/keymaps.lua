@@ -40,6 +40,7 @@ keymap.set("n", "<leader>ff", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 keymap.set("n", "<leader>ht", "<cmd>Telescope help_tags<cr>")
+keymap.set("n", "<leader>t", "<Plug>PlenaryTestFile")
 
 --move lines while highlighted
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -76,3 +77,8 @@ keymap.set("n", "<leader>r", require("telescope.builtin").lsp_references)
 keymap.set("n", "r", "<C-r>") -- use r to redo instead of ctrl-r
 keymap.set("n", "E", "ea") -- capital E will move to the end of the word and enter insert mode
 keymap.set("n", "<leader>w", ":w<CR>")
+
+-- my plugins
+keymap.set("n", "<leader><leader>t", ":ClockShowTime<CR>")
+keymap.set("n", "<leader><leader>s", ":ClockSelectTime<CR>")
+keymap.set("n", "<leader><leader>dt", ":ClockToggleTimer<CR>")

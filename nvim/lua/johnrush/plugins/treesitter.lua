@@ -29,6 +29,7 @@ treesitter.setup({
 		"php",
 		"scss",
 		"vue",
+		"vimdoc",
 	},
 	incremental_selection = {
 		enable = true,
