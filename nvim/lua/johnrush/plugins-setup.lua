@@ -112,13 +112,22 @@ return packer.startup(function(use)
 
 	use("lewis6991/gitsigns.nvim")
 
+	use("rhysd/git-messenger.vim")
+
+	use({
+		"folke/todo-comments.nvim",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	})
 	use("andweeb/presence.nvim")
 
 	use("wakatime/vim-wakatime")
 
 	-- My Plugins
 	use("~/plugins/clock")
-	use("~/plugins/goto-alias")
+	use("rushjs1/nuxt-goto.nvim")
+	--[[ 	use("~/plugins/goto-alias") ]]
 
 	--[[ use("~/plugins/html-jump")
 	use("~/plugins/stackmap")
