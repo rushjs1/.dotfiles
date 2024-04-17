@@ -13,6 +13,8 @@ if not typescript_setup then
 	return
 end
 
+local vue_language_server_path = require("mason-registry").get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language_server'
+
 local keymap = vim.keymap
 
 -- enable keybinds for available lsp server
@@ -30,17 +32,7 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "<leader>vtd", vim.lsp.buf.type_definition, opts)
 	keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-	keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
-	--keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-	--keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-	--keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-	--keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
-	--keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
-	--keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)
-	--keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-	--keymap.set("n", "L", "<cmd>Lspsaga hover_doc<CR>", opts)
-	--keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
+  keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 	if client.name == "tsserver" then
 		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
@@ -55,11 +47,18 @@ lspconfig["html"].setup({
 	on_attach = on_attach,
 })
 
-typescript.setup({
-	server = {
-		capabilities = capabilities,
-		on_attach = on_attach,
-	},
+lspconfig['tsserver'].setup({
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = vue_language_server_path,
+        languages = { 'vue' }
+      }
+    }
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 lspconfig["cssls"].setup({
@@ -91,6 +90,11 @@ lspconfig["lua_ls"].setup({
 })
 
 lspconfig["volar"].setup({
+  init_options = {
+    vue = {
+      hybridMode = false
+    }
+  },
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
@@ -99,3 +103,9 @@ lspconfig["phpactor"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+
+lspconfig["gopls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+

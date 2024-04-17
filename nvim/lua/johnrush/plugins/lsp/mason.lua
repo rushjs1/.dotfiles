@@ -24,6 +24,7 @@ mason_lspconfig.setup({
 		"lua_ls",
 		"volar",
 		"phpactor",
+    "gopls"
 	},
 })
 
