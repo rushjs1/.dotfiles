@@ -125,7 +125,9 @@ return packer.startup(function(use)
 	use("wakatime/vim-wakatime")
 
 	-- My Plugins
-	use("~/plugins/clock")
+	--use("~/plugins/clock")
+  use("rushjs1/clock.nvim")
+--[[   use("~/plugins/nuxt-goto.nvim") ]]
 	use("rushjs1/nuxt-goto.nvim")
 	--[[ 	use("~/plugins/goto-alias") ]]
 

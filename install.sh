@@ -5,12 +5,14 @@ echo "Removing existing dotfiles"
 rm -rf ~/.ideavimrc
 rm -rf ~/.config/nvim
 rm -rf ~/.zshrc
+rm -rf ~/.wezterm.lua
  
 echo "Creating symlinks"
 #symlink the things
 ln -s ~/.dotfiles/.ideavimrc ~/.ideavimrc
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.wezterm.lua ~/.wezterm.lua
 
 echo "Installing Homebrew"
 # install homebrew
@@ -29,6 +31,7 @@ if [[`uname` == 'Darwin']]; then
   echo "Mac detected."
 
   brew install --cask iterm2
+  brew install --cask wezterm
 fi
 
 echo "Install nvm"

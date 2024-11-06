@@ -8,6 +8,7 @@ if tonumber(hour) <= 7 or tonumber(hour) >= 18 then
 
 	require("vscode").setup({
 		disable_nvimtree_bg = true,
+    --transparent = true,
 		color_overrides = {
 			vscBack = "#000000",
 		},
@@ -20,6 +21,7 @@ else
 	--[[ 	status = pcall(vim.cmd, "colorscheme moonfly") ]]
 	require("vscode").setup({
 		disable_nvimtree_bg = true,
+    --transparent = true,
 		color_overrides = {
 			vscBack = "#000000",
 		},

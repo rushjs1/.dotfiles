@@ -8,11 +8,6 @@ if not cmp_nvim_lsp_status then
 	return
 end
 
-local typescript_setup, typescript = pcall(require, "typescript")
-if not typescript_setup then
-	return
-end
-
 local vue_language_server_path = require("mason-registry").get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language_server'
 
 local keymap = vim.keymap
@@ -34,7 +29,7 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-	if client.name == "tsserver" then
+	if client.name == "ts_ls" then
 		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
 	end
 end
@@ -47,7 +42,7 @@ lspconfig["html"].setup({
 	on_attach = on_attach,
 })
 
-lspconfig['tsserver'].setup({
+lspconfig['ts_ls'].setup({
   init_options = {
     plugins = {
       {
