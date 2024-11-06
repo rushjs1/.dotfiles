@@ -44,9 +44,10 @@ bindkey '^[[B' history-search-forward
 
 export PATH=$PATH:$HOME/go/bin
 
-alias nvim-l="NVIM_APPNAME=nvim-lazy nvim"
+alias nvim-p="NVIM_APPNAME=nvim-packer nvim"
+alias nvim-k="NVIM_APPNAME=nvim-kickstart nvim"
 
 vv(){
-  select config in nvim nvim-lazy kickstart.nvim
+  select config in nvim nvim-packer nvim-kickstart
   do NVIM_APPNAME=$config nvim $@; break; done
 }

@@ -4,16 +4,20 @@ echo "Removing existing dotfiles"
 #remove files if they already exist
 rm -rf ~/.ideavimrc
 rm -rf ~/.config/nvim
+rm -rf ~/.config/nvim-packer
+rm -rf ~/.config/nvim-kickstart
 rm -rf ~/.zshrc
 rm -rf ~/.wezterm.lua
  
 echo "Creating symlinks"
 #symlink the things
+# ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.ideavimrc ~/.ideavimrc
-ln -s ~/.dotfiles/nvim ~/.config/nvim
+ln -s ~/.dotfiles/nvim-lazy ~/.config/nvim
+ln -s ~/.dotfiles/nvim-packer ~/.config/nvim-packer
+ln -s ~/.dotfiles/nvim-kickstart ~/.config/nvim-kickstart
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/.wezterm.lua ~/.wezterm.lua
-ln -s ~/.dotfiles/nvim-lazy ~/.config/nvim-lazy
 
 echo "Installing Homebrew"
 # install homebrew

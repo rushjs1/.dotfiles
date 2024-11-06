@@ -69,7 +69,6 @@ config.colors = {
 config.font_size = 18
 
 config.window_background_opacity = 0.75
-
 config.window_padding = {
 	left = "0pt",
 	right = "0pt",
