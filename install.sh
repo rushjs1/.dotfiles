@@ -13,6 +13,7 @@ ln -s ~/.dotfiles/.ideavimrc ~/.ideavimrc
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/.wezterm.lua ~/.wezterm.lua
+ln -s ~/.dotfiles/nvim-lazy ~/.config/nvim-lazy
 
 echo "Installing Homebrew"
 # install homebrew
@@ -26,6 +27,7 @@ brew install mysql
 brew install sqlite
 brew install gh
 brew install node
+brew install font-meslo-lg-nerd-font
 
 if [[`uname` == 'Darwin']]; then
   echo "Mac detected."
