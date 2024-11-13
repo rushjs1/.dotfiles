@@ -1,3 +1,25 @@
+local checkForFile = function()
+  print("checking for lint file")
+  local dirList = vim.fn.systemlist("ls -a")
+
+  for _, dirname in ipairs(dirList) do
+    if dirname == ".eslintrc.js" or dirname == ".eslintrc.json" then
+      print("Linting enabled")
+      return true
+    end
+  end
+end
+
+local tryLint = function(lint, lint_augroup)
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    group = lint_augroup,
+    callback = function()
+      --print("calling lint.try_lint")
+      lint.try_lint()
+    end,
+  })
+end
+
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
@@ -17,12 +39,9 @@ return {
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-      group = lint_augroup,
-      callback = function()
-        lint.try_lint()
-      end,
-    })
+    if checkForFile() then
+      tryLint(lint, lint_augroup)
+    end
 
     vim.keymap.set("n", "<leader>l", function()
       lint.try_lint()

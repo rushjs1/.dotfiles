@@ -89,4 +89,12 @@ config.keys = {
 	},
 }
 
+for i = 1, 8 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CTRL",
+		action = wezterm.action.MoveTab(i - 1),
+	})
+end
+
 return config

@@ -38,7 +38,7 @@ return {
     keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
     keymap.set("n", "<leader>ht", "<cmd>Telescope help_tags<cr>")
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find Todos" })
-    keymap.set("n", "<leader>t", "<Plug>PlenaryTestFile")
+    keymap.set("n", "<leader>t", "<Plug>PlenaryTestFile", { desc = "Run test file" })
 
     keymap.set("n", "<leader>/", function()
       require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
