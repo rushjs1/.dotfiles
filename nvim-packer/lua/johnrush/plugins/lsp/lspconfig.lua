@@ -8,7 +8,8 @@ if not cmp_nvim_lsp_status then
 	return
 end
 
-local vue_language_server_path = require("mason-registry").get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language_server'
+local vue_language_server_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
+	.. "/node_modules/@vue/language_server"
 
 local keymap = vim.keymap
 
@@ -27,7 +28,7 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "<leader>vtd", vim.lsp.buf.type_definition, opts)
 	keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-  keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 	if client.name == "ts_ls" then
 		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
@@ -42,18 +43,18 @@ lspconfig["html"].setup({
 	on_attach = on_attach,
 })
 
-lspconfig['ts_ls'].setup({
-  init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = vue_language_server_path,
-        languages = { 'vue' }
-      }
-    }
-  },
-  capabilities = capabilities,
-  on_attach = on_attach,
+lspconfig["ts_ls"].setup({
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_language_server_path,
+				languages = { "vue" },
+			},
+		},
+	},
+	capabilities = capabilities,
+	on_attach = on_attach,
 })
 
 lspconfig["cssls"].setup({
@@ -85,11 +86,11 @@ lspconfig["lua_ls"].setup({
 })
 
 lspconfig["volar"].setup({
-  init_options = {
-    vue = {
-      hybridMode = false
-    }
-  },
+	init_options = {
+		vue = {
+			hybridMode = false,
+		},
+	},
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
@@ -100,7 +101,6 @@ lspconfig["phpactor"].setup({
 })
 
 lspconfig["gopls"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach
+	capabilities = capabilities,
+	on_attach = on_attach,
 })
-

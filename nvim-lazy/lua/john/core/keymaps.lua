@@ -49,7 +49,7 @@ keymap.set("n", "<leader>tq", ":tabclose<CR>", { desc = "Close current tab" })
 keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab" })
 
---[[ -- my plugins
-keymap.set("n", "<leader><leader>t", ":clockshowtime<cr>")
-keymap.set("n", "<leader><leader>s", ":clockselecttime<cr>")
-keymap.set("n", "<leader><leader>dt", ":clocktoggletimer<cr>") ]]
+-- my plugins
+vim.keymap.set("n", "<leader><leader>t", ":ClockShowTime<cr>")
+vim.keymap.set("n", "<leader><leader>s", ":ClockSelectTime<cr>")
+vim.keymap.set("n", "<leader><leader>dt", ":ClockToggleTimer<cr>")

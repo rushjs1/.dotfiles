@@ -18,6 +18,9 @@ return {
     local vue_language_server_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
       .. "/node_modules/@vue/language_server"
 
+    local typescript_volar_server_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
+      .. "/node_modules/typescript/lib/"
+
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
@@ -93,7 +96,18 @@ return {
         -- configure emmet language server
         lspconfig["emmet_ls"].setup({
           capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue" },
+          filetypes = {
+            "html",
+            "typescriptreact",
+            "javascriptreact",
+            "css",
+            "sass",
+            "scss",
+            "less",
+            "svelte",
+            "vue",
+            "blade",
+          },
         })
       end,
       ["lua_ls"] = function()
@@ -137,6 +151,9 @@ return {
           init_options = {
             vue = {
               hybridMode = false,
+            },
+            typescript = {
+              tsdk = typescript_volar_server_path,
             },
           },
           capabilities = capabilities,
