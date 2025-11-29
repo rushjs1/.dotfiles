@@ -40,7 +40,6 @@ return {
         "scss",
         "vue",
         "vimdoc",
-        "c",
         "blade",
       },
       incremental_selection = {

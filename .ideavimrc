@@ -1,6 +1,7 @@
 set relativenumber
 set number
 set scrolloff=8
+set clipboard=unnamed,unnamedplus
 let mapleader=" "
 
 imap jk <ESC>

@@ -4,26 +4,19 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
   },
   config = function()
-    local lspconfig = require("lspconfig")
-
-    local mason_lspconfig = require("mason-lspconfig")
-
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    local keymap = vim.keymap
-
-    local vue_language_server_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
-      .. "/node_modules/@vue/language_server"
-
-    local typescript_volar_server_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
-      .. "/node_modules/typescript/lib/"
+    -- used to enable autocompletion (assign to every lsp server config)
+    local capabilities = cmp_nvim_lsp.default_capabilities()
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
+        local keymap = vim.keymap
+
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
@@ -75,90 +68,101 @@ return {
       end,
     })
 
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-
     -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    --[[ local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    end ]]
 
-    mason_lspconfig.setup_handlers({
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = {
-            "html",
-            "typescriptreact",
-            "javascriptreact",
-            "css",
-            "sass",
-            "scss",
-            "less",
-            "svelte",
-            "vue",
-            "blade",
-          },
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-              workspace = {
-                library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.stdpath("config") .. "/lua"] = true,
-                },
-              },
-            },
-          },
-        })
-      end,
-      ["ts_ls"] = function()
-        lspconfig["ts_ls"].setup({
-          init_options = {
-            plugins = {
-              {
-                name = "@vue/typescript-plugin",
-                location = vue_language_server_path,
-                languages = { "vue" },
-              },
-            },
-          },
-          capabilities = capabilities,
-        })
-      end,
-      ["volar"] = function()
-        lspconfig["volar"].setup({
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-            typescript = {
-              tsdk = typescript_volar_server_path,
-            },
-          },
-          capabilities = capabilities,
-        })
-      end,
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = "󰠠 ",
+          [vim.diagnostic.severity.HINT] = " ",
+        },
+      },
     })
+
+    local MASON_ROOT = vim.fn.stdpath("data") .. "/mason"
+    local VUE_PKG = MASON_ROOT .. "/packages/vue-language-server"
+
+    local vue_language_server_path = VUE_PKG .. "/node_modules/@vue/language-server"
+    local typescript_volar_server_path = VUE_PKG .. "/node_modules/typescript/lib"
+
+    vim.lsp.config("lua_ls", {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = { globals = { "vim" } },
+          completion = { callSnippet = "Replace" },
+          workspace = {
+            library = {
+              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+              [vim.fn.stdpath("config") .. "/lua"] = true,
+            },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config("ts_ls", {
+      capabilities = capabilities,
+      init_options = {
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vue_language_server_path,
+            languages = { "vue" },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config("vue_ls", {
+      capabilities = capabilities,
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
+        typescript = {
+          tsdk = typescript_volar_server_path,
+        },
+      },
+    })
+
+    vim.lsp.config("emmet_ls", {
+      capabilities = capabilities,
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+        "svelte",
+        "vue",
+        "blade",
+      },
+    })
+
+    vim.lsp.config("tailwindcss", {
+      capabilities = capabilities,
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "vue",
+      },
+    })
+
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("ts_ls")
+    vim.lsp.enable("vue_ls")
+    vim.lsp.enable("emmet_ls")
+    vim.lsp.enable("tailwindcss")
   end,
 }
