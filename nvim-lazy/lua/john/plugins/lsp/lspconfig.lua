@@ -159,10 +159,21 @@ return {
       },
     })
 
+    vim.lsp.config("clangd", {
+      capabilities = capabilities,
+      filetypes = {
+        "c",
+        "cpp",
+        "objc",
+        "objcpp",
+      },
+    })
+
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("ts_ls")
     vim.lsp.enable("vue_ls")
     vim.lsp.enable("emmet_ls")
     vim.lsp.enable("tailwindcss")
+    vim.lsp.enable("clangd")
   end,
 }

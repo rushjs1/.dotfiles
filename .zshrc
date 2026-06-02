@@ -51,3 +51,28 @@ vv(){
   select config in nvim nvim-packer nvim-kickstart
   do NVIM_APPNAME=$config nvim $@; break; done
 }
+
+# bun completions
+[ -s "/Users/johnrush/.bun/_bun" ] && source "/Users/johnrush/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/Users/johnrush/.opencode/bin:$PATH
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/johnrush/.lmstudio/bin"
+# End of LM Studio CLI section
+
+ec() {
+  cd ~/Desktop/sites/ec_quote || return
+  nvim .
+}
+
+ec_run() {
+  cd ~/Desktop/sites/ec_quote || return
+  pnpm run watch
+}
+export PATH="$HOME/.local/bin:$PATH"

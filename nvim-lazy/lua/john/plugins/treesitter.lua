@@ -41,6 +41,8 @@ return {
         "vue",
         "vimdoc",
         "blade",
+        "c",
+        "cpp",
       },
       incremental_selection = {
         enable = true,
