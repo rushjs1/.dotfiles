@@ -1,65 +1,85 @@
 #!/usr/bin/env bash 
+set -euo pipefail
 
-echo "Removing existing dotfiles"
-#remove files if they already exist
-rm -rf ~/.ideavimrc
-rm -rf ~/.config/nvim
-rm -rf ~/.config/nvim-packer
-rm -rf ~/.config/nvim-kickstart
-rm -rf ~/.zshrc
-rm -rf ~/.wezterm.lua
- 
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_DIR="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
+
+link_dotfile() {
+  local source="$1"
+  local target="$2"
+
+  mkdir -p "$(dirname "$target")"
+
+  if [[ -L "$target" && "$(readlink "$target")" == "$source" ]]; then
+    printf 'Already linked: %s\n' "$target"
+    return 0
+  fi
+
+  if [[ -e "$target" || -L "$target" ]]; then
+    local relative_target="${target#"$HOME"/}"
+    local backup_target="$BACKUP_DIR/$relative_target"
+
+    mkdir -p "$(dirname "$backup_target")"
+    mv "$target" "$backup_target"
+    printf 'Backed up: %s -> %s\n' "$target" "$backup_target"
+  fi
+
+  ln -s "$source" "$target"
+  printf 'Linked: %s -> %s\n' "$target" "$source"
+}
+
 echo "Creating symlinks"
-#symlink the things
-# ln -s ~/.dotfiles/nvim ~/.config/nvim
-ln -s ~/.dotfiles/.ideavimrc ~/.ideavimrc
-ln -s ~/.dotfiles/nvim-lazy ~/.config/nvim
-ln -s ~/.dotfiles/nvim-packer ~/.config/nvim-packer
-ln -s ~/.dotfiles/nvim-kickstart ~/.config/nvim-kickstart
-ln -s ~/.dotfiles/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/.wezterm.lua ~/.wezterm.lua
 
-echo "Installing Homebrew"
-# install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+link_dotfile "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
+link_dotfile "$DOTFILES_DIR/nvim-lazy" "$HOME/.config/nvim"
+link_dotfile "$DOTFILES_DIR/nvim-packer" "$HOME/.config/nvim-packer"
+link_dotfile "$DOTFILES_DIR/nvim-kickstart" "$HOME/.config/nvim-kickstart"
+link_dotfile "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+link_dotfile "$DOTFILES_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
 
-brew install ripgrep
-brew install fzf
-brew install neovim
-brew install php
-brew install mysql
-brew install sqlite
-brew install gh
-brew install node
-brew install font-meslo-lg-nerd-font
-
-if [[`uname` == 'Darwin']]; then
-  echo "Mac detected."
-
-  brew install --cask iterm2
-  brew install --cask wezterm
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  echo "Homebrew is already installed"
 fi
 
-echo "Install nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x "/usr/local/bin/brew" ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
-echo "installing composer"
-#install composer
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
+echo "Installing Homebrew packages"
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
-sudo mv composer.phar /usr/local/bin/composer
+export NVM_DIR="$HOME/.nvm"
+NVM_VERSION="v0.40.4"
+
+if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
+  echo "Installing NVM $NVM_VERSION"
+  curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh" |
+    PROFILE=/dev/null bash
+else
+  echo "NVM is already installed"
+fi
+
+source "$NVM_DIR/nvm.sh"
+nvm install --lts
+nvm alias default 'lts/*'
 
 echo "installing valet"
 #install valet
 composer global require laravel/valet
 valet install
-mkdir ~/desktop/sites
-cd ~/desktop/sites
-valet park
-cd 
+
+SITES_DIR="$HOME/Desktop/sites"
+mkdir -p "$SITES_DIR"
+
+(
+  cd "$SITES_DIR"
+  valet park
+)
 
 echo "Completed"
 

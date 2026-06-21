@@ -5,17 +5,25 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-alias composer="php /usr/local/bin/composer"
-export PATH=$PATH:~/.composer/vendor/bin
+# Add Homebrew to this shell's environment.
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x "/usr/local/bin/brew" ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Load the prompt theme before its user configuration.
+if [[ -n "${HOMEBREW_PREFIX:-}" && -r "$HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme"
+fi
+
+[[ -r "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
 
 # pnpm
-# as of now just delete this 
-export PNPM_HOME="/Users/johnrush/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -25,10 +33,6 @@ esac
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
@@ -42,7 +46,7 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
-export PATH=$PATH:$HOME/go/bin
+export PATH="$PATH:$HOME/go/bin"
 
 alias nvim-p="NVIM_APPNAME=nvim-packer nvim"
 alias nvim-k="NVIM_APPNAME=nvim-kickstart nvim"
@@ -53,26 +57,36 @@ vv(){
 }
 
 # bun completions
-[ -s "/Users/johnrush/.bun/_bun" ] && source "/Users/johnrush/.bun/_bun"
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
-export PATH=/Users/johnrush/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/johnrush/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
 
 ec() {
-  cd ~/Desktop/sites/ec_quote || return
+  cd "$HOME/Desktop/sites/ec_quote" || return
   nvim .
 }
 
 ec_run() {
-  cd ~/Desktop/sites/ec_quote || return
+  cd "$HOME/Desktop/sites/ec_quote" || return
   pnpm run watch
 }
+
 export PATH="$HOME/.local/bin:$PATH"
+
+# Load interactive shell plugins last.
+if [[ -n "${HOMEBREW_PREFIX:-}" ]]; then
+  [[ -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
+    source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+  [[ -r "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] &&
+    source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
