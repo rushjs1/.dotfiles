@@ -16,6 +16,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "john.plugins" }, { import = "john.plugins.lsp" } }, {
+  dev = {
+    path = "~/plugins",
+    patterns = { "rushjs1" },
+    fallback = true,
+  },
   checker = {
     enabled = true,
     notify = false,
