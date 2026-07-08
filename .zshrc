@@ -12,6 +12,9 @@ elif [[ -x "/usr/local/bin/brew" ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+# Keep PATH entries unique as this file adds tool directories.
+typeset -U path PATH
+
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Load the prompt theme before its user configuration.
@@ -61,16 +64,6 @@ export PATH="$HOME/.opencode/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
-
-ec() {
-  cd "$HOME/Desktop/sites/ec_quote" || return
-  nvim .
-}
-
-ec_run() {
-  cd "$HOME/Desktop/sites/ec_quote" || return
-  pnpm run watch
-}
 
 export PATH="$HOME/.local/bin:$PATH"
 
