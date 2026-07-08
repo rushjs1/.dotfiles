@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -66,20 +66,29 @@ source "$NVM_DIR/nvm.sh"
 nvm install --lts
 nvm alias default 'lts/*'
 
-echo "installing valet"
-#install valet
-composer global require laravel/valet
-valet install
+if [[ "${INSTALL_VALET:-0}" == "1" ]]; then
+  echo "Installing Valet"
 
-SITES_DIR="$HOME/Desktop/sites"
-mkdir -p "$SITES_DIR"
+  composer global require laravel/valet
+  valet install
 
-(
-  cd "$SITES_DIR"
-  valet park
-)
+  DEFAULT_SITES_DIR="$HOME/sites"
+
+  if [[ -z "${SITES_DIR:-}" && -t 0 ]]; then
+    read -r -p "Where should Valet park sites? [$DEFAULT_SITES_DIR] " sites_dir_input
+    SITES_DIR="${sites_dir_input:-$DEFAULT_SITES_DIR}"
+  else
+    SITES_DIR="${SITES_DIR:-$DEFAULT_SITES_DIR}"
+  fi
+
+  mkdir -p "$SITES_DIR"
+
+  (
+    cd "$SITES_DIR"
+    valet park
+  )
+else
+  echo "Skipping Valet install. Run with INSTALL_VALET=1 to enable it."
+fi
 
 echo "Completed"
-
-
-
