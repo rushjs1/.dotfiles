@@ -407,7 +407,7 @@
           </div>
           <div class="summary-item">
             <p class="summary-label">Remaining</p>
-            <p class="summary-value" id="remaining-count">15</p>
+            <p class="summary-value" id="remaining-count">16</p>
           </div>
           <div class="summary-item">
             <p class="summary-label">Current step</p>
@@ -595,6 +595,20 @@
                 <div class="task-topline"><h3>Update Conform's LSP fallback option</h3><span class="badge badge-open">Medium</span></div>
                 <p>Replace the older <code>lsp_fallback = true</code> fields with the current <code>lsp_format = "fallback"</code> API in both formatting paths, then verify format-on-save behavior.</p>
                 <div class="references"><a href="nvim-lazy/lua/john/plugins/formatting.lua">formatting.lua</a><a href="https://github.com/stevearc/conform.nvim">Conform documentation</a></div>
+              </div>
+            </li>
+
+            <li class="task" data-status="open" data-task-id="oxc-formatting">
+              <input class="task-check" type="checkbox" aria-label="Mark Oxc formatter investigation complete" />
+              <div class="task-body">
+                <div class="task-topline"><h3>Explore Oxc for modern JS formatting and linting</h3><span class="badge badge-open">Medium</span></div>
+                <p>Investigate whether VoidZero's Oxc tools can replace or complement parts of the Vue, React, and Next.js workflow. Oxc includes Oxlint for ESLint-compatible linting and Oxfmt as a Prettier-compatible formatter, but Oxfmt is currently described as beta, so test compatibility before switching daily formatting.</p>
+                <ul>
+                  <li>Compare Oxfmt output against Prettier on representative Vue, React, Next.js, Tailwind, and Blade-adjacent project files.</li>
+                  <li>Check whether Conform has first-class support or whether a custom formatter entry is needed.</li>
+                  <li>Decide whether Oxlint should replace <code>eslint_d</code>, run alongside it, or stay project-local for now.</li>
+                </ul>
+                <div class="references"><a href="nvim-lazy/lua/john/plugins/formatting.lua">formatting.lua</a><a href="nvim-lazy/lua/john/plugins/linting.lua">linting.lua</a><a href="https://oxc.rs/">Oxc documentation</a></div>
               </div>
             </li>
 
