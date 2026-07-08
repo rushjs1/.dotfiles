@@ -32,8 +32,6 @@ echo "Creating symlinks"
 
 link_dotfile "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
 link_dotfile "$DOTFILES_DIR/nvim-lazy" "$HOME/.config/nvim"
-link_dotfile "$DOTFILES_DIR/nvim-packer" "$HOME/.config/nvim-packer"
-link_dotfile "$DOTFILES_DIR/nvim-kickstart" "$HOME/.config/nvim-kickstart"
 link_dotfile "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_dotfile "$DOTFILES_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
 

@@ -13,6 +13,9 @@ return {
     telescope.setup({
       defaults = {
         --path_display = { "smart" },
+        file_ignore_patterns = {
+          "^archive/",
+        },
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous,
