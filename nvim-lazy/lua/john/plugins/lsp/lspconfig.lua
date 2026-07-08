@@ -68,20 +68,13 @@ return {
       end,
     })
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    --[[ local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end ]]
-
     vim.diagnostic.config({
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = " ",
           [vim.diagnostic.severity.WARN] = " ",
           [vim.diagnostic.severity.HINT] = "󰠠 ",
-          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
         },
       },
     })
@@ -89,7 +82,6 @@ return {
     local MASON_ROOT = vim.fn.stdpath("data") .. "/mason"
     local VUE_PKG = MASON_ROOT .. "/packages/vue-language-server"
 
-    local vue_language_server_path = VUE_PKG .. "/node_modules/@vue/language-server"
     local typescript_volar_server_path = VUE_PKG .. "/node_modules/typescript/lib"
 
     vim.lsp.config("lua_ls", {
@@ -110,15 +102,6 @@ return {
 
     vim.lsp.config("ts_ls", {
       capabilities = capabilities,
-      init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = vue_language_server_path,
-            languages = { "vue" },
-          },
-        },
-      },
     })
 
     vim.lsp.config("vue_ls", {
