@@ -81,8 +81,10 @@ return {
 
     local MASON_ROOT = vim.fn.stdpath("data") .. "/mason"
     local VUE_PKG = MASON_ROOT .. "/packages/vue-language-server"
+    local TYPESCRIPT_LSP_PKG = MASON_ROOT .. "/packages/typescript-language-server"
 
-    local typescript_volar_server_path = VUE_PKG .. "/node_modules/typescript/lib"
+    local vue_language_server_path = VUE_PKG .. "/node_modules/@vue/language-server"
+    local typescript_server_path = TYPESCRIPT_LSP_PKG .. "/node_modules/typescript/lib"
 
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
@@ -102,18 +104,27 @@ return {
 
     vim.lsp.config("ts_ls", {
       capabilities = capabilities,
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+      },
+      init_options = {
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vue_language_server_path,
+            languages = { "javascript", "typescript", "vue" },
+          },
+        },
+      },
     })
 
     vim.lsp.config("vue_ls", {
       capabilities = capabilities,
-      init_options = {
-        vue = {
-          hybridMode = false,
-        },
-        typescript = {
-          tsdk = typescript_volar_server_path,
-        },
-      },
+      cmd = { "vue-language-server", "--stdio", "--tsdk=" .. typescript_server_path },
     })
 
     vim.lsp.config("emmet_ls", {
