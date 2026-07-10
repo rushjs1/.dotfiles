@@ -1,5 +1,5 @@
 return {
-  dir = "~/plugins/clock.nvim",
+  "rushjs1/clock.nvim",
   event = "VeryLazy",
   opts = {},
 }
