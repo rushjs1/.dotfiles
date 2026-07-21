@@ -7,6 +7,7 @@ brew "ripgrep"
 # Language tooling
 brew "composer"
 brew "php"
+brew "tree-sitter-cli"
 
 
 # Databases

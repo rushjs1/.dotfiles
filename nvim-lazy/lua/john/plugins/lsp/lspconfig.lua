@@ -81,10 +81,8 @@ return {
 
     local MASON_ROOT = vim.fn.stdpath("data") .. "/mason"
     local VUE_PKG = MASON_ROOT .. "/packages/vue-language-server"
-    local TYPESCRIPT_LSP_PKG = MASON_ROOT .. "/packages/typescript-language-server"
 
     local vue_language_server_path = VUE_PKG .. "/node_modules/@vue/language-server"
-    local typescript_server_path = TYPESCRIPT_LSP_PKG .. "/node_modules/typescript/lib"
 
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
@@ -124,7 +122,24 @@ return {
 
     vim.lsp.config("vue_ls", {
       capabilities = capabilities,
-      cmd = { "vue-language-server", "--stdio", "--tsdk=" .. typescript_server_path },
+      cmd = function(dispatchers, config)
+        local project_root = config.root_dir or vim.fn.getcwd()
+        local typescript_lib = vim.fs.find("node_modules/typescript/lib", {
+          path = project_root,
+          upward = true,
+          type = "directory",
+        })[1]
+
+        if not typescript_lib then
+          vim.notify(
+            "vue_ls requires TypeScript in the project. Install it with your package manager (for example, `npm install --save-dev typescript`).",
+            vim.log.levels.ERROR
+          )
+          return
+        end
+
+        return vim.lsp.rpc.start({ "vue-language-server", "--stdio", "--tsdk=" .. typescript_lib }, dispatchers)
+      end,
     })
 
     vim.lsp.config("emmet_ls", {
