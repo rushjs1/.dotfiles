@@ -40,6 +40,10 @@ return {
   branch = "main",
   lazy = false,
   build = function()
+    if vim.fn.executable("tree-sitter") ~= 1 then
+      error("nvim-treesitter requires the tree-sitter CLI; run `brew bundle --file=~/.dotfiles/Brewfile`")
+    end
+
     register_blade_parser()
     require("nvim-treesitter").install(parsers):wait(300000)
   end,
