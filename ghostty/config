@@ -50,3 +50,5 @@ palette = 15=#60fbbf
 
 #keybind
 keybind = shift+escape=toggle_fullscreen
+keybind = cmd+shift+left=move_tab:-1
+keybind = cmd+shift+right=move_tab:+1

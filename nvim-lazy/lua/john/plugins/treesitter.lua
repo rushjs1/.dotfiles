@@ -23,6 +23,7 @@ local parsers = {
   "blade",
   "c",
   "cpp",
+  "c_sharp",
 }
 
 local function register_blade_parser()
@@ -95,6 +96,7 @@ return {
         "blade",
         "c",
         "cpp",
+        "cs",
       },
       callback = function(args)
         local started = pcall(vim.treesitter.start, args.buf)
