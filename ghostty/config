@@ -1,0 +1,54 @@
+# Shell
+command = /bin/zsh
+
+# Appearance
+background-opacity = 0.88
+background-blur-radius = 20
+
+# Font
+font-family = "MesloLGS NF"
+font-size = 15
+
+# Cursor
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+
+# Theme 
+
+background = #010c18
+foreground = #ecdef5
+cursor-color = #38ff9d
+selection-background = #38ff9c
+selection-foreground = #000000
+
+palette = 0=#0b3b61
+palette = 1=#ff3a3a
+palette = 2=#53ffd0
+palette = 3=#fff384
+palette = 4=#1376f9
+palette = 5=#c792ea
+palette = 6=#ff5ed4
+palette = 7=#16fda2
+
+palette = 8=#62686d
+palette = 9=#ff54b0
+palette = 10=#74ffd8
+palette = 11=#fdf5ae
+palette = 12=#388eff
+palette = 13=#ae81ff
+palette = 14=#ff69d7
+palette = 15=#60fbbf
+
+#keybind
+keybind = shift+escape=toggle_fullscreen
+keybind = cmd+shift+left=move_tab:-1
+keybind = cmd+shift+right=move_tab:+1

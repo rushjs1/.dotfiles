@@ -23,6 +23,7 @@ return {
         python = { "isort", "black" },
         php = { "pint", "php_cs_fixer" },
         blade = { "blade-formatter" },
+        cs = {},
       },
       format_on_save = {
         lsp_format = "fallback",

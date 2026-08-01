@@ -16,5 +16,11 @@ return {
     "mason-org/mason-lspconfig.nvim",
     version = "^1.0.0",
     dependencies = { "neovim/nvim-lspconfig" },
+    --[[ opts = {
+      ensure_installed = {
+        "roslyn_ls",
+        "roslyn-language-server",
+      },
+    }, ]]
   },
 }

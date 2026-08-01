@@ -178,11 +178,16 @@ return {
       },
     })
 
+    vim.lsp.config("roslyn_ls", {
+      capabilities = capabilities,
+    })
+
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("ts_ls")
     vim.lsp.enable("vue_ls")
     vim.lsp.enable("emmet_ls")
     vim.lsp.enable("tailwindcss")
     vim.lsp.enable("clangd")
+    vim.lsp.enable("roslyn_ls")
   end,
 }

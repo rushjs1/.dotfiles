@@ -49,8 +49,14 @@ keymap.set("n", "<leader>tq", ":tabclose<CR>", { desc = "Close current tab" })
 keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab" })
 
+--diff
+vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory %<cr>", { desc = "File history (current file)" })
+vim.keymap.set("n", "<leader>dl", "<cmd>.DiffviewFileHistory --follow<CR>", { desc = "Single line history" })
+vim.keymap.set("n", "<leader>do", "<cmd>DiffviewOpen<CR>", { desc = "Open Diffview" })
+
 -- my plugins
 vim.keymap.set("n", "<leader><leader>t", ":ClockShowTime<cr>")
 vim.keymap.set("n", "<leader><leader>s", ":ClockSelectTime<cr>")
 vim.keymap.set("n", "<leader><leader>dt", ":ClockToggleTimer<cr>")
 vim.keymap.set("n", "<leader><leader>d", ":DiffstreamOpen<cr>")
+vim.keymap.set("n", "<leader>dc", ":DiffstreamClose<cr>")
