@@ -67,6 +67,10 @@ export PATH="$PATH:$HOME/.lmstudio/bin"
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# herdr completions
+fpath=("$HOME/.zsh/completions" $fpath)
+autoload -Uz compinit && compinit
+
 # Load interactive shell plugins last.
 if [[ -n "${HOMEBREW_PREFIX:-}" ]]; then
   [[ -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
