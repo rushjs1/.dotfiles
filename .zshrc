@@ -82,3 +82,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.config/vite-plus/env"

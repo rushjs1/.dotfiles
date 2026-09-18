@@ -1,0 +1,6 @@
+interface:
+  display_name: "PRSummary"
+  short_description: "Draft a practical pull request summary"
+  default_prompt: "Use $pr-summary to draft a PR summary for my current branch."
+policy:
+  allow_implicit_invocation: false

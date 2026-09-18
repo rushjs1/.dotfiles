@@ -28,6 +28,26 @@ link_dotfile() {
   printf 'Linked: %s -> %s\n' "$target" "$source"
 }
 
+ensure_real_directory() {
+  local target="$1"
+
+  if [[ -d "$target" && ! -L "$target" ]]; then
+    return 0
+  fi
+
+  if [[ -e "$target" || -L "$target" ]]; then
+    local relative_target="${target#"$HOME"/}"
+    local backup_target="$BACKUP_DIR/$relative_target"
+
+    mkdir -p "$(dirname "$backup_target")"
+    mv "$target" "$backup_target"
+    printf 'Backed up: %s -> %s\n' "$target" "$backup_target"
+  fi
+
+  mkdir -p "$target"
+  printf 'Created directory: %s\n' "$target"
+}
+
 echo "Creating symlinks"
 
 link_dotfile "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
@@ -36,6 +56,19 @@ link_dotfile "$DOTFILES_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 link_dotfile "$DOTFILES_DIR/nvim-lazy" "$HOME/.config/nvim"
 link_dotfile "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_dotfile "$DOTFILES_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
+
+ensure_real_directory "$HOME/.agents/skills"
+ensure_real_directory "$HOME/.claude/skills"
+ensure_real_directory "$HOME/.pi/agent/skills"
+
+for skill_file in "$DOTFILES_DIR"/skills/*/SKILL.md; do
+  skill_dir="$(dirname "$skill_file")"
+  skill_name="$(basename "$skill_dir")"
+
+  link_dotfile "$skill_dir" "$HOME/.agents/skills/$skill_name"
+  link_dotfile "$skill_dir" "$HOME/.claude/skills/$skill_name"
+  link_dotfile "$skill_dir" "$HOME/.pi/agent/skills/$skill_name"
+done
 
 if ! command -v brew >/dev/null 2>&1; then
   echo "Installing Homebrew"
