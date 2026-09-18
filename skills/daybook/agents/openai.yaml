@@ -1,0 +1,7 @@
+interface:
+  display_name: "Daybook"
+  short_description: "Draft accurate consulting timesheet entries"
+  default_prompt: "Use $daybook to prepare today's consulting daybook entries."
+
+policy:
+  allow_implicit_invocation: false
