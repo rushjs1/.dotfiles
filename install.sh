@@ -2,6 +2,31 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OS="$(uname -s)"
+case "$OS" in
+  Darwin|Linux) ;;
+  *) printf 'Unsupported operating system: %s\n' "$OS" >&2; exit 1 ;;
+esac
+
+# Fail before touching dotfiles if a macOS-only install was requested.
+if [[ "$OS" != "Darwin" && "${INSTALL_VALET:-0}" == "1" ]]; then
+  echo "Laravel Valet requires macOS. Rerun without INSTALL_VALET=1 on Linux." >&2
+  exit 1
+fi
+
+# Homebrew needs system tools even when it supplies the remaining packages.
+if [[ "$OS" == "Linux" ]]; then
+  missing_tools=()
+  for tool in cc make ps curl file git; do
+    command -v "$tool" >/dev/null 2>&1 || missing_tools+=("$tool")
+  done
+  if (( ${#missing_tools[@]} )); then
+    printf 'Missing Linux prerequisites: %s\n' "${missing_tools[*]}" >&2
+    echo "On Ubuntu/Debian, run: sudo apt-get update && sudo apt-get install build-essential procps curl file git" >&2
+    exit 1
+  fi
+fi
+
 BACKUP_DIR="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
 
 link_dotfile() {
@@ -70,17 +95,38 @@ for skill_file in "$DOTFILES_DIR"/skills/*/SKILL.md; do
   link_dotfile "$skill_dir" "$HOME/.pi/agent/skills/$skill_name"
 done
 
-if ! command -v brew >/dev/null 2>&1; then
-  echo "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  echo "Homebrew is already installed"
-fi
+# Discover an existing installation before deciding to bootstrap Homebrew.
+load_homebrew() {
+  local brew_bin
+  if command -v brew >/dev/null 2>&1; then
+    brew_bin="$(command -v brew)"
+  elif [[ "$OS" == "Linux" && -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    brew_bin="/home/linuxbrew/.linuxbrew/bin/brew"
+  elif [[ "$OS" == "Linux" && -x "$HOME/.linuxbrew/bin/brew" ]]; then
+    brew_bin="$HOME/.linuxbrew/bin/brew"
+  elif [[ "$OS" == "Darwin" && -x "/opt/homebrew/bin/brew" ]]; then
+    brew_bin="/opt/homebrew/bin/brew"
+  elif [[ "$OS" == "Darwin" && -x "/usr/local/bin/brew" ]]; then
+    brew_bin="/usr/local/bin/brew"
+  else
+    return 1
+  fi
+  local brew_env
+  brew_env="$("$brew_bin" shellenv)" || return 1
+  eval "$brew_env"
+}
 
-if [[ -x "/opt/homebrew/bin/brew" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x "/usr/local/bin/brew" ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
+if load_homebrew; then
+  echo "Homebrew is already installed"
+else
+  echo "Installing Homebrew"
+  # Keep download failures visible instead of running an empty shell command.
+  homebrew_installer="$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$homebrew_installer"
+  if ! load_homebrew; then
+    echo "Homebrew installation could not be found. Add brew to PATH and rerun." >&2
+    exit 1
+  fi
 fi
 
 echo "Installing Homebrew packages"
