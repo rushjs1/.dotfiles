@@ -174,5 +174,5 @@ fi
 
 echo "Completed"
 if [[ "$OS" == "Linux" ]]; then
-  echo "Next: see README.md for choosing Zsh as your login shell and setting up Ghostty/fonts."
+  echo "Next: choose Zsh as your login shell. Install Ghostty and fonts separately on Linux."
 fi
