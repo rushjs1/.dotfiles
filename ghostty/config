@@ -1,5 +1,4 @@
-# Shell
-command = /bin/zsh
+# Shell: use the default login shell configured for this user.
 
 # Appearance
 background-opacity = 0.88

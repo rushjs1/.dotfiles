@@ -1,6 +1,7 @@
 # Command-line tools
 brew "fzf"
 brew "gh"
+brew "lazygit"
 brew "neovim"
 brew "ripgrep"
 

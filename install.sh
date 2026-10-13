@@ -173,3 +173,6 @@ else
 fi
 
 echo "Completed"
+if [[ "$OS" == "Linux" ]]; then
+  echo "Next: see README.md for choosing Zsh as your login shell and setting up Ghostty/fonts."
+fi
