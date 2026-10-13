@@ -178,6 +178,10 @@ return {
       },
     })
 
+    vim.lsp.config("jdtls", {
+      capabilities = capabilities,
+    })
+
     vim.lsp.config("roslyn_ls", {
       capabilities = capabilities,
     })
@@ -188,6 +192,7 @@ return {
     vim.lsp.enable("emmet_ls")
     vim.lsp.enable("tailwindcss")
     vim.lsp.enable("clangd")
+    vim.lsp.enable("jdtls")
     vim.lsp.enable("roslyn_ls")
   end,
 }

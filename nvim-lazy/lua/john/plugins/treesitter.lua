@@ -1,4 +1,7 @@
 local parsers = {
+  "java",
+  "xml",
+  "properties",
   "json",
   "javascript",
   "typescript",
@@ -72,6 +75,9 @@ return {
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
+        "java",
+        "xml",
+        "jproperties",
         "json",
         "javascript",
         "javascriptreact",
