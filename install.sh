@@ -51,6 +51,7 @@ ensure_real_directory() {
 echo "Creating symlinks"
 
 link_dotfile "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
+link_dotfile "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 link_dotfile "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 link_dotfile "$DOTFILES_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 link_dotfile "$DOTFILES_DIR/nvim-lazy" "$HOME/.config/nvim"

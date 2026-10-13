@@ -33,9 +33,10 @@ Match the user's established daybook format when an example is available. Otherw
 
 Treat every billable entry as client-visible:
 
+- Keep each entry's narrative description to 300 characters or fewer, including spaces and punctuation. Verify the character count before presenting or entering an entry, and tighten the wording without dropping essential facts when it exceeds the limit.
 - Be professional, polite, clear, and focused on the client's objectives, deliverables, and outcomes.
 - Explain work at a concise mid-to-high level that a non-specialist client can understand. Translate technical evidence into product, user, or business value.
-- For substantive development or general client work, write 2–5 sentences covering the objective, the client-visible capability or deliverable advanced, and the result or progress made.
+- For substantive development or general client work, cover the objective, the client-visible capability or deliverable advanced, and the result or progress made within the 300-character limit.
 - Keep meeting-only and routine non-billable entries concise unless more explanation is useful.
 - Omit file names, endpoint or route names, code-level mechanics, test counts, type checking, linting, and other engineering-process details unless the user asks for them or they materially affect the client-facing outcome.
 - Avoid unnecessary implementation detail, unexplained jargon, internal deliberation, confidential information, blame, and unsupported claims.
