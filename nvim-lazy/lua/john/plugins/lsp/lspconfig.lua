@@ -178,6 +178,10 @@ return {
       },
     })
 
+    vim.lsp.config("pyright", {
+      capabilities = capabilities,
+    })
+
     vim.lsp.config("jdtls", {
       capabilities = capabilities,
     })
@@ -192,6 +196,7 @@ return {
     vim.lsp.enable("emmet_ls")
     vim.lsp.enable("tailwindcss")
     vim.lsp.enable("clangd")
+    vim.lsp.enable("pyright")
     vim.lsp.enable("jdtls")
     vim.lsp.enable("roslyn_ls")
   end,
