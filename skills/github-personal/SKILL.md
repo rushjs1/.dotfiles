@@ -1,5 +1,5 @@
 ---
-name: personal-github
+name: github-personal
 description: Use the personal GitHub account when requested.
 ---
 
