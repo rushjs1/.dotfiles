@@ -84,4 +84,4 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.config/vite-plus/env"
+[[ -r "$HOME/.config/vite-plus/env" ]] && source "$HOME/.config/vite-plus/env"
