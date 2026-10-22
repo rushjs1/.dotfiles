@@ -71,6 +71,19 @@ for skill_file in "$DOTFILES_DIR"/skills/*/SKILL.md; do
   link_dotfile "$skill_dir" "$HOME/.pi/agent/skills/$skill_name"
 done
 
+if [[ "$(uname -s)" == "Linux" ]]; then
+  link_dotfile "$DOTFILES_DIR/hypr/input.lua" "$HOME/.config/hypr/input.lua"
+  link_dotfile "$DOTFILES_DIR/ghostty/config.linux" "$HOME/.config/ghostty/config.linux"
+  link_dotfile "$DOTFILES_DIR/assets/mesloNerdFont.ttf" "$HOME/.local/share/fonts/dotfiles-meslo.ttf"
+
+  fc-cache "$HOME/.local/share/fonts"
+
+  omarchy pkg add ghostty php composer mariadb sqlite wezterm
+
+  echo "Completed"
+  exit 0
+fi
+
 if ! command -v brew >/dev/null 2>&1; then
   echo "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
