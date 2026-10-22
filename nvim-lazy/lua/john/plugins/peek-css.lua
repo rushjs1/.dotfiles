@@ -1,5 +1,6 @@
 return {
-  dir = vim.fn.expand("~/plugins/peek-css.nvim"),
+  "rushjs1/peek-css",
+  name = "peek-css.nvim",
   main = "peek_css",
   opts = {
     keymap = "<leader>c",
