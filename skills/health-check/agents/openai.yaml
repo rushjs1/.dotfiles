@@ -1,4 +1,4 @@
 interface:
-  display_name: "Health Check"
+  display_name: "Health check"
   short_description: "Check PC vitals and estimate monthly electricity cost"
-  default_prompt: "Use $health-check to check this computer, tell me whether it should stay on, and estimate a month of 24/7 electricity in Indianapolis."
+  default_prompt: "Use $health-check to check this PC's vitals, assess whether it needs shutting down, and estimate monthly electricity cost in Indianapolis."
