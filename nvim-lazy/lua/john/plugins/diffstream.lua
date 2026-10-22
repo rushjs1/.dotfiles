@@ -2,7 +2,7 @@ return {
   "rushjs1/diffstream.nvim",
   config = function()
     require("diffstream").setup({
-      --[[ feedback = {
+      feedback = {
         runners = {
           {
             name = "Codex",
@@ -31,7 +31,7 @@ return {
             },
           },
         },
-      }, ]]
+      },
     })
   end,
 }
