@@ -1,6 +1,7 @@
 # Command-line tools
 brew "fzf"
 brew "gh"
+brew "lazygit"
 brew "neovim"
 brew "ripgrep"
 
@@ -15,11 +16,14 @@ brew "mysql"
 brew "sqlite"
 
 # macOS applications and fonts
-cask "font-meslo-lg-nerd-font"
-cask "iterm2"
-cask "wezterm"
+if OS.mac?
+  cask "font-meslo-lg-nerd-font"
+  cask "iterm2"
+  cask "wezterm"
+end
 
 # Shell
+brew "zsh" unless OS.mac?
 brew "powerlevel10k"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
