@@ -1,6 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Check platform support before creating symlinks or installing anything.
+INSTALL_OS="$(uname -s)"
+
+case "$INSTALL_OS" in
+  Darwin) ;;
+  Linux)
+    if [[ ! -r /etc/os-release ]] || ! (
+      ID=""
+      source /etc/os-release &&
+        [[ "${ID:-}" == "omarchy" ]]
+    ); then
+      echo "Unsupported Linux distribution. This installer supports macOS and Omarchy." >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Unsupported operating system: $INSTALL_OS. This installer supports macOS and Omarchy." >&2
+    exit 1
+    ;;
+esac
+
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
 
@@ -71,14 +92,21 @@ for skill_file in "$DOTFILES_DIR"/skills/*/SKILL.md; do
   link_dotfile "$skill_dir" "$HOME/.pi/agent/skills/$skill_name"
 done
 
-if [[ "$(uname -s)" == "Linux" ]]; then
+if [[ "$INSTALL_OS" == "Linux" ]]; then
+  link_dotfile "$DOTFILES_DIR/omarchy/shell.json" "$HOME/.config/omarchy/shell.json"
+  link_dotfile "$DOTFILES_DIR/hypr/bindings.lua" "$HOME/.config/hypr/bindings.lua"
   link_dotfile "$DOTFILES_DIR/hypr/input.lua" "$HOME/.config/hypr/input.lua"
   link_dotfile "$DOTFILES_DIR/ghostty/config.linux" "$HOME/.config/ghostty/config.linux"
+  link_dotfile "$DOTFILES_DIR/zsh/config.linux" "$HOME/.config/zsh/config.linux"
   link_dotfile "$DOTFILES_DIR/assets/mesloNerdFont.ttf" "$HOME/.local/share/fonts/dotfiles-meslo.ttf"
 
   fc-cache "$HOME/.local/share/fonts"
 
-  omarchy pkg add ghostty php composer mariadb sqlite wezterm
+  omarchy pkg add omarchy-zsh zsh-autosuggestions
+
+  if [[ ! -d "$HOME/.local/share/powerlevel10k" ]]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.local/share/powerlevel10k"
+  fi
 
   echo "Completed"
   exit 0

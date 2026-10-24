@@ -1,5 +1,5 @@
 # Shell
-command = /bin/bash
+command = /usr/bin/zsh
 shell-integration-features = no-cursor,ssh-env
 
 # Font
