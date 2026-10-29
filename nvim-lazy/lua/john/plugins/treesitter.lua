@@ -1,6 +1,10 @@
 local parsers = {
   "java",
   "python",
+  "go",
+  "gomod",
+  "gowork",
+  "gosum",
   "xml",
   "properties",
   "json",
@@ -78,6 +82,10 @@ return {
       pattern = {
         "java",
         "python",
+        "go",
+        "gomod",
+        "gowork",
+        "gosum",
         "xml",
         "jproperties",
         "json",

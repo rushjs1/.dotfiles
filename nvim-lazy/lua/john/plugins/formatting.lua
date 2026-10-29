@@ -20,6 +20,7 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
+        go = { "gofmt" },
         php = { "pint", "php_cs_fixer" },
         blade = { "blade-formatter" },
         cs = {},
