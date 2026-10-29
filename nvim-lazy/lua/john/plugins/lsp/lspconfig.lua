@@ -182,6 +182,10 @@ return {
       capabilities = capabilities,
     })
 
+    vim.lsp.config("gopls", {
+      capabilities = capabilities,
+    })
+
     vim.lsp.config("jdtls", {
       capabilities = capabilities,
     })
@@ -197,6 +201,7 @@ return {
     vim.lsp.enable("tailwindcss")
     vim.lsp.enable("clangd")
     vim.lsp.enable("pyright")
+    vim.lsp.enable("gopls")
     vim.lsp.enable("jdtls")
     vim.lsp.enable("roslyn_ls")
   end,
