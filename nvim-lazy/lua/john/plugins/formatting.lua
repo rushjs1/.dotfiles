@@ -24,11 +24,17 @@ return {
         blade = { "blade-formatter" },
         cs = {},
       },
-      format_on_save = {
-        lsp_format = "fallback",
-        async = false,
-        timeout_ms = 1000,
-      },
+      -- Skip Java: jdtls would reformat whole files with Eclipse defaults.
+      format_on_save = function(bufnr)
+        if vim.bo[bufnr].filetype == "java" then
+          return
+        end
+        return {
+          lsp_format = "fallback",
+          async = false,
+          timeout_ms = 1000,
+        }
+      end,
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>fm", function()
