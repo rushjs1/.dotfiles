@@ -38,6 +38,12 @@ o.bind("SUPER + SHIFT + C", "ChatGPT - web", { webapp = "https://chatgpt.com" })
 hl.unbind("SUPER + SHIFT + G") -- prev signal
 o.bind("SUPER + SHIFT + G", "GitHub", { webapp = "https://github.com/rushjs1" })
 
+hl.unbind("SUPER + SHIFT + S") -- prev Google Maps
+o.bind("SUPER + SHIFT + S", "Music", { omarchy = "spotify" })
+
+hl.unbind("SUPER + SHIFT + M") -- prev Music
+o.bind("SUPER + SHIFT + M", "Google Maps", { webapp = "https://maps.google.com/", focus = true })
+
 hl.unbind("SUPER + F")
 hl.unbind("SUPER + ALT + F")
 
