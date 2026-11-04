@@ -17,7 +17,7 @@ return {
     version = "^2.0.0",
     dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
-      ensure_installed = { "pyright" },
+      ensure_installed = { "pyright", "gopls" },
       -- Server activation is managed explicitly in lspconfig.lua.
       automatic_enable = false,
     },
