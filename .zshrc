@@ -1,8 +1,33 @@
+# Check platform support before loading the prompt or other shell integrations.
+case "$OSTYPE" in
+  darwin*) ;;
+  linux*)
+    if [[ ! -r /etc/os-release ]] || ! (
+      ID=""
+      source /etc/os-release &&
+        [[ "${ID:-}" == "omarchy" ]]
+    ); then
+      print -u2 "Unsupported Linux distribution. This zsh configuration supports macOS and Omarchy."
+      return 1
+    fi
+    ;;
+  *)
+    print -u2 "Unsupported operating system: $OSTYPE. This zsh configuration supports macOS and Omarchy."
+    return 1
+    ;;
+esac
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Omarchy uses its own zsh integrations; the remaining setup is for macOS.
+if [[ "$OSTYPE" == linux* ]]; then
+  source "$HOME/.config/zsh/config.linux"
+  return
 fi
 
 # Add Homebrew to this shell's environment.
@@ -84,4 +109,4 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.config/vite-plus/env"
+[[ -r "$HOME/.config/vite-plus/env" ]] && source "$HOME/.config/vite-plus/env"

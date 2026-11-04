@@ -1,0 +1,46 @@
+# Load Omarchy's environment, aliases, and functions without its Starship prompt.
+source /usr/share/omarchy/default/bash/env-bootstrap
+source /usr/share/omarchy-zsh/shell/envs
+source /usr/share/omarchy-zsh/shell/aliases
+source /usr/share/omarchy-zsh/shell/functions
+
+# Keep local development tools on PATH without duplicate entries.
+typeset -U path PATH
+export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+path=(
+  "$HOME/.config/composer/vendor/bin"
+  "$PNPM_HOME"
+  "$BUN_INSTALL/bin"
+  "$HOME/.local/bin"
+  "$HOME/go/bin"
+  "$HOME/.opencode/bin"
+  "$HOME/.lmstudio/bin"
+  "${path[@]}"
+)
+
+# Register personal completions before Omarchy initializes zsh's completion system.
+fpath=("$HOME/.zsh/completions" "${fpath[@]}")
+source /usr/share/omarchy-zsh/shell/zoptions
+
+# Initialize tools for zsh; Omarchy's combined init also starts Starship.
+eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+if command -v try >/dev/null 2>&1; then
+  eval "$(SHELL=/usr/bin/zsh command try init "$HOME/Work/tries")"
+fi
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
+# Load optional tool integrations only when those tools have installed them.
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+[[ -r "$HOME/.config/vite-plus/env" ]] && source "$HOME/.config/vite-plus/env"
+
+# Suggest commands from history; Omarchy's zoptions already enables highlighting.
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Powerlevel10k owns the prompt. Its first-run wizard creates the personal config.
+source "$HOME/.local/share/powerlevel10k/powerlevel10k.zsh-theme"
+if [[ -r "$HOME/.p10k.zsh" ]]; then
+  source "$HOME/.p10k.zsh"
+fi

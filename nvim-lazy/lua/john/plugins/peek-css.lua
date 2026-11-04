@@ -1,5 +1,5 @@
 return {
-  "rushjs1/peek-css",
+  "rushjs1/peek-css.nvim",
   name = "peek-css.nvim",
   main = "peek_css",
   opts = {
