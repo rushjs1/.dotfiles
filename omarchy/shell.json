@@ -3,10 +3,10 @@
     "layout": {
       "center": [
         {
-          "format": "dddd HH:mm",
+          "format": "dddd h:mm AP",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "h\n—\nmm\nAP"
         }
       ],
       "left": [
