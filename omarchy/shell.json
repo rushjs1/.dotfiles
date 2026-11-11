@@ -1,25 +1,12 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.indicators"
-        },
         {
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
           "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
-        },
-        {
-          "id": "omarchy.weather"
-        },
-        {
-          "id": "omarchy.system-update"
         }
       ],
       "left": [
@@ -36,6 +23,9 @@
       "right": [
         {
           "id": "omarchy.tray"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
         },
         {
           "id": "omarchy.agents"
@@ -55,13 +45,69 @@
         {
           "id": "omarchy.power"
         }
-      ]
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Eastern",
+              "zone": "US/Eastern"
+            },
+            {
+              "name": "Indianapolis",
+              "zone": "America/Indiana/Indianapolis",
+              "lat": 39.76838,
+              "lon": -86.15804,
+              "region": "Indiana, US"
+            },
+            {
+              "name": "Chicago",
+              "zone": "America/Chicago",
+              "lat": 41.85003,
+              "lon": -87.65005,
+              "region": "Illinois, US"
+            },
+            {
+              "name": "London",
+              "zone": "Europe/London"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "Rome",
+              "zone": "Europe/Rome",
+              "lat": 41.89193,
+              "lon": 12.51133,
+              "region": "Lazio, IT"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            }
+          ]
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        }
+      ],
+      "tray": []
     },
     "position": "top",
     "transparent": false
   },
   "idle": {
-    "lock": 1050,
+    "lock": 1350,
     "screensaver": 150
   },
   "plugins": [],
